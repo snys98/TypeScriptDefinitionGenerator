@@ -11,7 +11,7 @@ download in the
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
 
-## 1.1.1
+## 2.0.0
 
 - [x] Discard support for VB
 - [x] Strengthen support for enum members
