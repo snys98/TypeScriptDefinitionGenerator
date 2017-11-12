@@ -5,7 +5,7 @@
 ## NOTE: This is a customed redistribute
 The orginal repo can be found here: 
 https://github.com/madskristensen/TypeScriptDefinitionGenerator
-#### Best Regard for him!
+#### Best regard for him!
 
 
 
