@@ -1,6 +1,6 @@
 # TypeScript Definition Generator
 
-[![Build status](https://ci.appveyor.com/api/projects/status/0c5ylw4s31pepy6s?svg=true)](https://ci.appveyor.com/project/snys98/typescriptdefinitiongenerator)
+[![Build status](https://ci.appveyor.com/api/projects/status/wltdlh3bxllj6691?svg=true)](https://ci.appveyor.com/project/snys98/typescriptdefinitiongenerator)
 
 ## NOTE: This is a customed redistribute
 The orginal repo can be found here: 
