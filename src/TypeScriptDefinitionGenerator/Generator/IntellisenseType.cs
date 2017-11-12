@@ -42,7 +42,8 @@ namespace TypeScriptDefinitionGenerator
         {
             get
             {
-                if (IsDictionary) return GetKVPTypes();
+                if (IsDictionary)
+                    return GetKVPTypes();
                 return GetTargetName(CodeName, false);
             }
         }

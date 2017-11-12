@@ -9,13 +9,13 @@ namespace TypeScriptDefinitionGenerator
 {
     public class OptionsDialogPage : DialogPage
     {
-        internal const bool _defCamelCaseEnumerationValues = true;
+        internal const bool _defCamelCaseEnumerationValues = false;
         internal const bool _defCamelCasePropertyNames = true;
-        internal const bool _defCamelCaseTypeNames = true;
+        internal const bool _defCamelCaseTypeNames = false;
         internal const bool _defClassInsteadOfInterface = false;
         internal const bool _defGlobalScope = false;
         internal const bool _defWebEssentials2015 = true;
-        internal const string _defModuleName = "server";
+        internal const string _defModuleName = "Server.Dtos";
 
         [Category("Casing")]
         [DisplayName("Camel case enum values")]
@@ -34,7 +34,7 @@ namespace TypeScriptDefinitionGenerator
 
         [Category("Settings")]
         [DisplayName("Default Module name")]
-        [Description("Set the top-level module name for the generated .d.ts file. Default is \"server\"")]
+        [Description("Set the top-level module name for the generated .d.ts file. Default is \"Server.Dtos\"")]
         public string DefaultModuleName { get; set; } = _defModuleName;
 
         [Category("Settings")]
@@ -84,7 +84,7 @@ namespace TypeScriptDefinitionGenerator
                 return overrides != null ? overrides.CamelCaseTypeNames : DtsPackage.Options.CamelCaseTypeNames;
             }
         }
-
+        //todo:设置为服务器命名空间
         static public string DefaultModuleName
         {
             get

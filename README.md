@@ -2,53 +2,103 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/l61k3vbx5jsf6o0i?svg=true)](https://ci.appveyor.com/project/madskristensen/typescriptdefinitiongenerator)
 
+## NOTE: This is a customed redistribute
+The orginal repo can be found here: 
+https://github.com/madskristensen/TypeScriptDefinitionGenerator
+#### Best Regard for him!
+
+
+
 Download this extension from the [Marketplace](https://marketplace.visualstudio.com/vsgallery/7ef40759-8802-4b48-b4d6-3c250fb4916e)
 or get the [CI build](http://vsixgallery.com/extension/cad7b20b-4b83-4ca6-bf24-ca36a494241c/).
 
 ---------------------------------------
 
-Creates and synchronizes TypeScript Definition files (d.ts) from C#/VB model classes to build strongly typed web application where the server- and client-side models are in sync. Works on all .NET project types
+Creates and synchronizes TypeScript Definition files (d.ts) from C# model classes(DTO) to build strongly typed web application where the server and client-side models are in sync. Works on all .NET project types
 
 See the [change log](CHANGELOG.md) for changes and road map.
 
 For Visual Studio 2015 support, install [Web Essentials 2015](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.WebEssentials20153)
 
 ## From C# to .d.ts file
-This extension will automatically generate .d.ts files from any C#/VB file you specify. It will turn the following C# class into a TypeScript interface.
+This extension will automatically generate .d.ts files from any C# file you specify. It will turn the following C# class into a TypeScript interface.
 
+For *.cs file like this
 ```csharp
-class Customer
+namespace foo
 {
-    public int Id { get; set; }
-    public string Name { get; set; }
-    public IEnumerable<string> Tags { get; set; }
+    public class ReuqestBase
+    {
+        public string RequestName { get; set; }
+    }
+
+    public class CustomerReuqest : ReuqestBase
+    {
+        public CustomerDto CustomerDto { get; set; }
+    }
+
+    /// <summary>
+    /// dto for single customer
+    /// </summary>
+    public class CustomerDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public IEnumerable<string> Tags { get; set; }
+        //predefined type for customers
+        public CustomerType CusomerType { get; set; }
+    }
+
+    public enum CustomerType
+    {
+        Normal = 0,
+        /// <summary>
+        /// Charged over $100
+        /// </summary>
+        Vip = 1
+    }
 }
 ```
 
 Becomes this .d.ts file:
 
 ```typescript
-declare module server {
-	interface customer {
+declare module Server.Dtos {
+	interface ReuqestBase {
+		requestName: string;
+	}
+	interface CustomerReuqest extends ReuqestBase {
+		customerDto: Server.Dtos.CustomerDto;
+	}
+	/** dto for single customer */
+	interface CustomerDto {
 		id: number;
 		name: string;
 		tags: string[];
+		/** predefined type for customers */
+		cusomerType: Server.Dtos.CustomerType;
+	}
+	const enum CustomerType {
+		Normal = 0,
+		/** Charged over $100 */
+		Vip = 1,
 	}
 }
+
 ```
 
-The generated .d.ts file can then be consumed from your own TypeScript files by referencing `server.<typeName>` interfaces.
+The generated .d.ts file can then be consumed from your own TypeScript files by referencing `Server.Dtos.<typeName>` interfaces.
 
-## Generate d.ts file from C#/VB
-To generate a .d.ts file, right-click any .cs or .vb file and select **Generate TypeScript Definition**.
+## Generate d.ts file from C#
+To generate a .d.ts file, right-click any .cs file and select **Generate TypeScript Definition**.
+
+Then a .generated.d.ts file is created and nested under the parent C# file.
 
 ![Context menu](art/context-menu.png)
 
-A .d.ts file is created and nested under the parent C#/VB file.
 
-![Nested file](art/nested-file.png)
 
-Every time the C#/VB file is modified and saved, the content of the .d.ts file is updated to reflect the changes.
+Every time the C# file is modified and saved, the content of the .d.ts file is updated to reflect the changes.
 
 ## Settings
 Configure this extension from the **Tools -> Options** dialog.

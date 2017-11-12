@@ -279,15 +279,14 @@ namespace TypeScriptDefinitionGenerator
                 {
                     IsArray = !isDictionary && (isArray || isCollection),
                     IsDictionary = isDictionary,
-                    CodeName = effectiveTypeRef.AsString,
-                    ClientSideReferenceName =
-                        effectiveTypeRef.TypeKind == vsCMTypeRef.vsCMTypeRefCodeType &&
-                        effectiveTypeRef.CodeType.InfoLocation == vsCMInfoLocation.vsCMInfoLocationProject
-                        ?
-                            (codeClass != null && HasIntellisense(codeClass.ProjectItem, references) ? (GetNamespace(codeClass) + "." + Utility.CamelCaseClassName(GetClassName(codeClass))) : null) ??
-                            (codeEnum != null && HasIntellisense(codeEnum.ProjectItem, references) ? (GetNamespace(codeEnum) + "." + Utility.CamelCaseClassName(codeEnum.Name)) : null)
-                        : null
+                    CodeName = effectiveTypeRef.AsString
                 };
+                if (effectiveTypeRef.TypeKind == vsCMTypeRef.vsCMTypeRefCodeType && effectiveTypeRef.CodeType.InfoLocation == vsCMInfoLocation.vsCMInfoLocationProject)
+                {
+                    result.ClientSideReferenceName = (codeClass != null && HasIntellisense(codeClass.ProjectItem, references) ? (GetNamespace(codeClass) + "." + Utility.CamelCaseClassName(GetClassName(codeClass))) : null) ??
+                                                     (codeEnum != null && HasIntellisense(codeEnum.ProjectItem, references) ? (GetNamespace(codeEnum) + "." + Utility.CamelCaseClassName(codeEnum.Name)) : null);
+                }
+                else result.ClientSideReferenceName = null;
 
                 if (!isPrimitive && codeClass != null && !traversedTypes.Contains(effectiveTypeRef.CodeType.FullName) && !isCollection)
                 {
@@ -376,11 +375,8 @@ namespace TypeScriptDefinitionGenerator
             {
                 var fileName = GenerationService.GenerateFileName(projectItem.FileNames[i]);
 
-                if (File.Exists(fileName))
-                {
-                    references.Add(fileName);
-                    return true;
-                }
+                references.Add(fileName);
+                return true;
             }
 
             return false;

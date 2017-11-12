@@ -1,6 +1,6 @@
 # Road map
 
-- [ ] Test on VB files
+- [ ] Dynamic build module name from server dto's namespace
 
 Features that have a checkmark are complete and available for
 download in the
@@ -10,6 +10,14 @@ download in the
 
 These are the changes to each version that has been released
 on the official Visual Studio extension gallery.
+
+## 1.1.1
+
+- [x] Discard support for VB
+- [x] Strengthen support for enum members
+- [x] Set default namespace to Server.Dtos
+- [x] Set generated file name to *.generated.d.ts
+- [x] Change some default settings for generated d.ts code style
 
 ## 1.1
 
