@@ -2,10 +2,6 @@
 
 - [ ] Dynamic build module name from server dto's namespace
 
-Features that have a checkmark are complete and available for
-download in the
-[CI build](http://vsixgallery.com/extension/cad7b20b-4b83-4ca6-bf24-ca36a494241c/).
-
 # Change log
 
 These are the changes to each version that has been released
