@@ -101,7 +101,7 @@ Then a .generated.d.ts file is created and nested under the parent C# file.
 Every time the C# file is modified and saved, the content of the .d.ts file is updated to reflect the changes.
 
 ## Settings
-Configure this extension from the **Tools -> Options** dialog.
+Configure this extension from the **Tools -> Options -> Text Editor -> JavaScript/TypeScript -> Generate d.ts** dialog.
 
 ![Settings](art/settings.png)
 
